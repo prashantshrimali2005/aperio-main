@@ -1,0 +1,5 @@
+import { SkillProfile } from "@/components/skill-profile";
+import { requirePageUser } from "@/lib/auth";
+import { query } from "@/lib/db";
+export const metadata={title:"Skill Profile"};
+export default async function SkillsPage(){const user=await requirePageUser();const skills=await query<Record<string,unknown>>(`SELECT s.id,s.name,s.category,s.description,us.level,us.source,us.user_verified AS "userVerified" FROM skills s LEFT JOIN user_skills us ON us.skill_id=s.id AND us.user_id=$1 ORDER BY s.category,s.name`,[user.id]);return <div className="mx-auto max-w-[1100px] px-5 py-8 lg:px-10 lg:py-10"><div className="max-w-2xl"><p className="text-sm font-semibold text-[var(--primary)]">Correctable intelligence</p><h1 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Your skill profile</h1><p className="mt-3 text-sm leading-6 text-[var(--muted)]">Review inferred levels and correct anything that does not reflect your current experience. Your verified input takes priority in later analyses.</p></div><div className="mt-8"><SkillProfile skills={skills as unknown as never[]}/></div></div>;}

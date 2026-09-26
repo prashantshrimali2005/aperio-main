@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #f7f8fc;
+  --surface: #ffffff;
+  --surface-elevated: #fbfcff;
+  --surface-muted: #f1f3f8;
+  --surface-glass: rgb(255 255 255 / 88%);
+  --foreground: #111522;
+  --muted: #6c7488;
+  --muted-strong: #454e63;
+  --border: #e2e6ef;
+  --border-strong: #cbd2df;
+  --primary: #4f46e5;
+  --primary-strong: #3f36d8;
+  --primary-soft: #eeefff;
+  --primary-faint: #f7f7ff;
+  --positive: #10b981;
+  --positive-soft: #eafaf4;
+  --attention: #f59e0b;
+  --attention-soft: #fff7e8;
+  --critical: #dc5b61;
+  --critical-soft: #fff0f1;
+  --shadow: 0 1px 2px rgb(19 27 50 / 4%), 0 12px 32px rgb(34 45 80 / 5%);
+  --shadow-raised: 0 18px 50px rgb(34 45 80 / 10%);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #080e17;
+  --surface: #0d1520;
+  --surface-elevated: #111b28;
+  --surface-muted: #172231;
+  --surface-glass: rgb(8 14 23 / 88%);
+  --foreground: #f3f6fb;
+  --muted: #8d98aa;
+  --muted-strong: #bac3d1;
+  --border: #202d3c;
+  --border-strong: #344457;
+  --primary: #7467f3;
+  --primary-strong: #8f84ff;
+  --primary-soft: #211e48;
+  --primary-faint: #111329;
+  --positive: #35c77d;
+  --positive-soft: #102b22;
+  --attention: #ff9d2d;
+  --attention-soft: #342416;
+  --critical: #ef7479;
+  --critical-soft: #351d22;
+  --shadow: 0 1px 0 rgb(255 255 255 / 2%);
+  --shadow-raised: 0 20px 60px rgb(0 0 0 / 30%);
+}
+
+* { box-sizing: border-box; border-color: var(--border); }
+html {
+  background: var(--background);
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 82% -10%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 24%, transparent), transparent 28%);
+}
+button, input, textarea, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: color-mix(in srgb, var(--primary) 25%, transparent); }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.aperio-panel {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.aperio-page {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding: 28px 20px 104px;
+}
+
+.aperio-eyebrow {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* Skip-to-content link: visually hidden until focused */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-raised);
+  transition: transform 0.18s ease;
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
+/* Loading placeholder */
+.aperio-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-muted);
+  border-radius: 10px;
+}
+.aperio-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--surface) 60%, transparent), transparent);
+  animation: aperio-shimmer 1.5s infinite;
+}
+
+@keyframes aperio-shimmer {
+  to { transform: translateX(100%); }
+}
+
+@media (min-width: 1024px) {
+  .aperio-page { padding: 32px 32px 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}

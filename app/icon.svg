@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Aperio">
+  <defs>
+    <linearGradient id="surface" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111B2B"/>
+      <stop offset="1" stop-color="#080E17"/>
+    </linearGradient>
+    <linearGradient id="left" x1="30" y1="12" x2="13" y2="51" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9A90FF"/>
+      <stop offset="1" stop-color="#4F46E5"/>
+    </linearGradient>
+    <linearGradient id="right" x1="34" y1="12" x2="51" y2="51" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7467F3"/>
+      <stop offset="1" stop-color="#315EEB"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#surface)"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="14.5" fill="none" stroke="#FFFFFF" stroke-opacity=".12"/>
+  <path d="M13.5 50 29.5 13.5" fill="none" stroke="url(#left)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M34.5 13.5 50.5 50" fill="none" stroke="url(#right)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M23.5 39H40.5" fill="none" stroke="#F8FAFF" stroke-width="6" stroke-linecap="round"/>
+</svg>

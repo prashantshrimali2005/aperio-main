@@ -1,0 +1,6 @@
+import { ProfileEditor } from "@/components/profile-editor";
+import { requirePageUser } from "@/lib/auth";
+import { one } from "@/lib/db";
+import { getRoles } from "@/lib/reports";
+export const metadata={title:"Profile"};
+export default async function ProfilePage(){const user=await requirePageUser();const [profile,roles]=await Promise.all([one<Record<string,unknown>>(`SELECT u.full_name AS "fullName",u.email,p.headline,p.current_status AS "currentStatus",p.bio,p.location,p.years_experience AS "yearsExperience",p.target_role_id AS "targetRoleId",p.target_level AS "targetLevel" FROM users u LEFT JOIN profiles p ON p.user_id=u.id WHERE u.id=$1`,[user.id]),getRoles(user.id)]);return <div className="mx-auto max-w-[1180px] px-5 py-8 lg:px-10 lg:py-10"><div className="max-w-2xl"><p className="text-sm font-semibold text-[var(--primary)]">Your source of truth</p><h1 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Professional profile</h1><p className="mt-3 text-sm leading-6 text-[var(--muted)]">Keep your background accurate so future analyses can make better, more transparent inferences.</p></div><div className="mt-8"><ProfileEditor profile={profile??{fullName:user.fullName,email:user.email}} roles={roles}/></div></div>;}

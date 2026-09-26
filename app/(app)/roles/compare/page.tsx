@@ -1,0 +1,5 @@
+import { RoleComparison } from "@/components/role-comparison";
+import { requirePageUser } from "@/lib/auth";
+import { getAnalysisHistory } from "@/lib/reports";
+export const metadata={title:"Compare roles"};
+export default async function ComparePage(){const user=await requirePageUser();const history=await getAnalysisHistory(user.id,50);return <div className="mx-auto max-w-[1050px] px-5 py-8 lg:px-10 lg:py-10"><div className="max-w-2xl"><p className="text-sm font-semibold text-[var(--primary)]">A clearer career decision</p><h1 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Compare role readiness</h1><p className="mt-3 text-sm leading-6 text-[var(--muted)]">Compare two persisted analyses to see overlap, score differences, and the specific work each path asks of you.</p></div><div className="mt-8">{history.length>=2?<RoleComparison history={history as unknown as never[]}/>:<div className="rounded-[18px] border bg-[var(--surface)] p-10 text-center text-sm text-[var(--muted)]">Complete at least two analyses to compare roles.</div>}</div></div>;}
